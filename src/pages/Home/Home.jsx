@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import MovieList from 'components/MovieList/MovieList';
-import { getTrending } from 'utils/js/fetch';
 import Loader from 'components/Loader/Loader';
+import { getTrending } from 'utils/js/fetch';
 
 const Home = () => {
   const [dataMovieList, setDataMovieList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-
       try {
         const resp = await getTrending(
           'https://api.themoviedb.org/3/trending/all/day?api_key=38126fe3d6cea635722ecf700f4bc3bf'
@@ -18,7 +16,7 @@ const Home = () => {
 
         setDataMovieList(resp);
       } catch (error) {
-        throw new Error(error);
+        console.log(error);
       } finally {
         setIsLoading(false);
       }
@@ -28,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Loader isLoading={isLoading} />
-      {dataMovieList && <MovieList dataMovies={dataMovieList} />}
+      {!isLoading && <MovieList dataMovies={dataMovieList} />}
     </>
   );
 };

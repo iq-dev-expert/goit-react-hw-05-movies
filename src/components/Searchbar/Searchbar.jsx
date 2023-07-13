@@ -1,36 +1,32 @@
 import { useSearchParams } from 'react-router-dom';
 
-const Searchbar = ({ serchMovies }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const movieTitle = searchParams.get('movie-title') ?? '';
-
-  const onInputChange = e => {
-    const { value } = e.target;
-
-    value ? setSearchParams({ 'movie-title': value }) : setSearchParams({});
-  };
+const Searchbar = () => {
+  const [, setSearchParams] = useSearchParams();
 
   const onSearchButtonClick = e => {
     e.preventDefault();
+    const inputValue = e.target.query.value.trim().toLowerCase();
 
-    serchMovies(movieTitle);
+    if (!inputValue) {
+      return;
+    }
 
-    setSearchParams({});
+    setSearchParams({ query: inputValue });
+    e.target.reset();
   };
 
   return (
     <>
-      <form>
+      <form onSubmit={onSearchButtonClick}>
         <input
+          name="query"
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search movies"
-          value={movieTitle}
-          onChange={onInputChange}
         />
 
-        <button type="submit" onClick={onSearchButtonClick}>
+        <button type="submit">
           <span>Search</span>
         </button>
       </form>
