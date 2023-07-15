@@ -30,23 +30,27 @@ const Cast = () => {
   return (
     <>
       <Loader isLoading={isLoading} />
-      {!isLoading && (
+      {!isLoading && dataCast.length !== 0 ? (
         <ul>
           {dataCast.map(({ name, character, profile_path, id }) => (
             <li key={id}>
-              {profile_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${profile_path}`}
-                  alt={name}
-                />
-              ) : (
-                <img src={imgNotFound} alt={name} width={200} height={300} />
-              )}
+              <div style={{ width: 200, height: 300 }}>
+                {profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${profile_path}`}
+                    alt={name}
+                  />
+                ) : (
+                  <img src={imgNotFound} alt={name} width={200} height={300} />
+                )}
+              </div>
               <p>Actor: {name}</p>
               <p>Character: {character}</p>
             </li>
           ))}
         </ul>
+      ) : (
+        "We don't have any cast for this movie."
       )}
     </>
   );

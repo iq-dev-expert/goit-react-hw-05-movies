@@ -8,12 +8,12 @@ import { searchMovies } from 'utils/js/fetch';
 const Movies = () => {
   const [dataSearchMovies, setSearchMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [searchParams] = useSearchParams({});
   const query = searchParams.get('query');
 
   useEffect(() => {
     if (!query) {
-      setSearchMovies([]);
       return;
     }
 
@@ -24,6 +24,12 @@ const Movies = () => {
         const resp = await searchMovies(
           `https://api.themoviedb.org/3/search/movie?api_key=38126fe3d6cea635722ecf700f4bc3bf&query=${query}&include_adult=false&language=en-US&page=1`
         );
+
+        if (resp.length === 0) {
+          setError(true);
+        } else {
+          setError(false);
+        }
 
         setSearchMovies(resp);
       } catch (error) {
@@ -38,7 +44,11 @@ const Movies = () => {
     <>
       <Loader isLoading={isLoading} />
       <Searchbar />
-      {!isLoading && <MovieList dataMovies={dataSearchMovies} />}
+      {error ? (
+        <div>{query} film does not exist!</div>
+      ) : (
+        !isLoading && <MovieList dataMovies={dataSearchMovies} />
+      )}
     </>
   );
 };
