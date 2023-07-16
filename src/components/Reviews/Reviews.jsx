@@ -14,9 +14,7 @@ const Reviews = () => {
 
     (async () => {
       try {
-        const resp = await getReviews(
-          `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=38126fe3d6cea635722ecf700f4bc3bf&language=en-US&page=1`
-        );
+        const resp = await getReviews(movieId);
 
         if (resp.length === 0) {
           setError(true);
