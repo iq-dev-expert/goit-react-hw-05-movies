@@ -30,7 +30,7 @@ const Reviews = () => {
     <>
       <Loader isLoading={isLoading} />
       {!isLoading && dataReviews.length !== 0 ? (
-        <ul>
+        <ul className="py-5">
           {dataReviews.map(({ author, content, id }) => (
             <li key={id}>
               <p>Author: {author}</p>
@@ -39,7 +39,7 @@ const Reviews = () => {
           ))}
         </ul>
       ) : (
-        "We don't have any reviews for this movie."
+        <p>We don't have any reviews for this movie.</p>
       )}
     </>
   );

@@ -26,6 +26,7 @@ const Home = () => {
   return (
     <>
       <Loader isLoading={isLoading} />
+      <h1 className="text-4xl">Trending today</h1>
       {!isLoading && <MovieList dataMovies={dataMovieList} />}
     </>
   );

@@ -31,10 +31,10 @@ const Cast = () => {
     <>
       <Loader isLoading={isLoading} />
       {!isLoading && dataCast.length !== 0 ? (
-        <ul>
+        <ul className="py-5">
           {dataCast.map(({ name, character, profile_path, id }) => (
             <li key={id}>
-              <div style={{ width: 200, height: 300 }}>
+              <div className="w-50 h-76">
                 {profile_path ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${profile_path}`}
@@ -50,7 +50,7 @@ const Cast = () => {
           ))}
         </ul>
       ) : (
-        "We don't have any cast for this movie."
+        <p>We don't have any cast for this movie.</p>
       )}
     </>
   );

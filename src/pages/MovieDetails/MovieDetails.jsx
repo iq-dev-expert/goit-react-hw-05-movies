@@ -46,15 +46,35 @@ const MovieDetails = () => {
       <Loader isLoading={isLoading} />
       {error ? (
         <>
-          <Link to={backLinkLocationRef.current}>Go back</Link>
+          <button
+            type="button"
+            className="mb-5 hover:bg-violet-300 focus:bg-violet-300 hover:border-violet-300 focus:border-violet-300"
+          >
+            <Link
+              to={backLinkLocationRef.current}
+              className="no-underline text-inherit"
+            >
+              Go back
+            </Link>
+          </button>
           <div>Page not found</div>
         </>
       ) : (
         !isLoading && (
           <>
-            <Link to={backLinkLocationRef.current}>Go back</Link>
-            <div>
-              <div style={{ width: 200, height: 300 }}>
+            <button
+              type="button"
+              className="mb-5 hover:bg-violet-300 focus:bg-violet-300 hover:border-violet-300 focus:border-violet-300"
+            >
+              <Link
+                to={backLinkLocationRef.current}
+                className="no-underline text-inherit"
+              >
+                Go back
+              </Link>
+            </button>
+            <div className="flex shadow-md">
+              <div className="mr-5 w-50 h-76">
                 {poster_path ? (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${poster_path}`}
@@ -64,14 +84,16 @@ const MovieDetails = () => {
                   <img src={imgNotFound} alt={name} />
                 )}
               </div>
-              <h1>{movieTitle}</h1>
-              <p>User Score: {calcUserScore()}%</p>
-              <h2>Overview</h2>
-              <p>{overview}</p>
-              <h3>Genres</h3>
-              <p>{selectionGenres()}</p>
+              <div className="w-3/4">
+                <h1>{movieTitle}</h1>
+                <p>User Score: {calcUserScore()}%</p>
+                <h2>Overview</h2>
+                <p>{overview}</p>
+                <h3>Genres</h3>
+                <p>{selectionGenres()}</p>
+              </div>
             </div>
-            <div>
+            <div className="pb-5 shadow-md">
               <p>Additional information</p>
               <ul>
                 <li>

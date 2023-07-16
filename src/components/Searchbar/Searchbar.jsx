@@ -17,16 +17,20 @@ const Searchbar = () => {
 
   return (
     <>
-      <form onSubmit={onSearchButtonClick}>
+      <form onSubmit={onSearchButtonClick} className="mb-5">
         <input
           name="query"
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search movies"
+          className="w-80 mr-5"
         />
 
-        <button type="submit">
+        <button
+          type="submit"
+          className="hover:bg-violet-300 focus:bg-violet-300 hover:border-violet-300 focus:border-violet-300"
+        >
           <span>Search</span>
         </button>
       </form>
