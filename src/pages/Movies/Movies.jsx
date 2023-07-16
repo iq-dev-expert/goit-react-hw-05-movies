@@ -21,9 +21,7 @@ const Movies = () => {
       setIsLoading(true);
 
       try {
-        const resp = await searchMovies(
-          `https://api.themoviedb.org/3/search/movie?api_key=38126fe3d6cea635722ecf700f4bc3bf&query=${query}&include_adult=false&language=en-US&page=1`
-        );
+        const resp = await searchMovies(query);
 
         if (resp.length === 0) {
           setError(true);

@@ -15,9 +15,7 @@ const Cast = () => {
 
     (async () => {
       try {
-        const resp = await getCast(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=38126fe3d6cea635722ecf700f4bc3bf&language=en-US`
-        );
+        const resp = await getCast(movieId);
 
         if (resp.length === 0) {
           setError(true);
@@ -32,6 +30,11 @@ const Cast = () => {
     })();
   }, [movieId]);
 
+  const getPoster = profile_path =>
+    profile_path
+      ? `https://image.tmdb.org/t/p/w200${profile_path}`
+      : imgNotFound;
+
   return (
     <>
       <Loader isLoading={isLoading} />
@@ -40,14 +43,7 @@ const Cast = () => {
           {dataCast.map(({ name, character, profile_path, id }) => (
             <li key={id}>
               <div className="w-50 h-76">
-                {profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${profile_path}`}
-                    alt={name}
-                  />
-                ) : (
-                  <img src={imgNotFound} alt={name} />
-                )}
+                <img src={getPoster(profile_path)} alt={name} />
               </div>
               <p>Actor: {name}</p>
               <p>Character: {character}</p>
