@@ -41,7 +41,7 @@ const Cast = () => {
                     alt={name}
                   />
                 ) : (
-                  <img src={imgNotFound} alt={name} width={200} height={300} />
+                  <img src={imgNotFound} alt={name} />
                 )}
               </div>
               <p>Actor: {name}</p>
