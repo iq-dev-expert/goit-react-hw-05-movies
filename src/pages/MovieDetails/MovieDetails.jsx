@@ -30,6 +30,9 @@ const MovieDetails = () => {
     })();
   }, [movieId]);
 
+  const getPoster = poster_path =>
+    poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : imgNotFound;
+
   const selectionGenres = () => {
     return genres.map(genre => genre.name).join(' ');
   };
@@ -73,14 +76,7 @@ const MovieDetails = () => {
             </button>
             <div className="flex shadow-md">
               <div className="mr-5 w-50 h-76">
-                {poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${poster_path}`}
-                    alt={movieTitle}
-                  />
-                ) : (
-                  <img src={imgNotFound} alt={movieTitle} />
-                )}
+                <img src={getPoster(poster_path)} alt={movieTitle} />
               </div>
               <div className="w-3/4">
                 <h1>{movieTitle}</h1>
