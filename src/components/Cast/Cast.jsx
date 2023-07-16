@@ -7,6 +7,7 @@ import { getCast } from 'utils/js/fetch';
 const Cast = () => {
   const [dataCast, setDataCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -17,6 +18,10 @@ const Cast = () => {
         const resp = await getCast(
           `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=38126fe3d6cea635722ecf700f4bc3bf&language=en-US`
         );
+
+        if (resp.length === 0) {
+          setError(true);
+        }
 
         setDataCast(resp);
       } catch (error) {
@@ -30,7 +35,7 @@ const Cast = () => {
   return (
     <>
       <Loader isLoading={isLoading} />
-      {!isLoading && dataCast.length !== 0 ? (
+      {!error ? (
         <ul className="py-5">
           {dataCast.map(({ name, character, profile_path, id }) => (
             <li key={id}>
