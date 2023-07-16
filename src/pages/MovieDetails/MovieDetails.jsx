@@ -81,7 +81,7 @@ const MovieDetails = () => {
                     alt={movieTitle}
                   />
                 ) : (
-                  <img src={imgNotFound} alt={name} />
+                  <img src={imgNotFound} alt={movieTitle} />
                 )}
               </div>
               <div className="w-3/4">
